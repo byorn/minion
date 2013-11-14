@@ -1,7 +1,0 @@
-<example>
-   <id type="Integer"/>
-   <name type="String"/>
-   <dob type="Date"/>
-   <createddate type="DateTime"/>
-   <amount type="BigDecimal"/>
-</example>

@@ -14,6 +14,6 @@ task hello << {
 }
 
 task runScript (dependsOn: 'classes', type: JavaExec) {
-    main = 'MyScript'
+    main = 'ScriptDAOGenerator'
     classpath = sourceSets.main.runtimeClasspath
 }

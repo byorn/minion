@@ -12,8 +12,9 @@ def packageName = "com.softwareperson.dao"
 def searchfield_getter = "Name"
 def searchfield = "name"
 
-def template_dao = "../templates/TemplateDAO.java"
-def file_to_create = "../target/"+entity+"DAO"
+
+def template_dao = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\TemplateDAO.java"
+def file_to_create = "C:\\work\\Projects\\minion\\build\\"+entity+"DAO.java"
 
 
 
@@ -23,6 +24,7 @@ def file_to_create = "../target/"+entity+"DAO"
 //}
 
 def newfile = new File(file_to_create)
+newfile.createNewFile();
 def file = new File(template_dao)
 file.eachLine{
         line->
