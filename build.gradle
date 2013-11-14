@@ -1,0 +1,19 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.0.5'
+}
+
+
+task hello << {
+    println "ok"
+}
+
+task runScript (dependsOn: 'classes', type: JavaExec) {
+    main = 'MyScript'
+    classpath = sourceSets.main.runtimeClasspath
+}

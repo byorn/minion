@@ -34,4 +34,5 @@ file.eachLine{
         newfile.append(str + "\n")
 }
 
+println "done"
 
