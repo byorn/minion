@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package {packageName};
+package {PackageNameStart}.dao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,24 +13,25 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import softwareperson.framework.dao.exceptions.NonexistentEntityException;
-import softwareperson.framework.dtos.Search{entity}sDTO;
-import softwareperson.framework.entities.{entity};
+import {PackageNameStart}.dao.exceptions.NonexistentEntityException;
+import {PackageNameStart}.dtos.Search{Entity}DTO;
+import {PackageNameStart}.entities.{Entity};
+import {PackageNameStart}.util.RecordStatus;
 
 
 /**
  *
  * @author 260514b
  */
-public class {entity}DAO implements Serializable {
+public class {Entity}DAO implements Serializable {
 
     private static  final EntityManager em = null;
     
-    private static {entity}DAO instance = new {entity}DAO();
+    private static {Entity}DAO instance = new {Entity}DAO();
     
-    private {entity}DAO(){};
+    private {Entity}DAO(){};
     
-    public static {entity}DAO instance(){
+    public static {Entity}DAO instance(){
         return instance;
     }
 
@@ -45,11 +46,12 @@ public class {entity}DAO implements Serializable {
         
     }
 
-    public void create({entity} obj) {
+    public void create({Entity} obj) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            obj.setStatus(RecordStatus.ACT.toString());
             em.persist(obj);
             em.getTransaction().commit();
         } finally {
@@ -59,12 +61,13 @@ public class {entity}DAO implements Serializable {
         }
     }
 
-    public void edit({entity} obj) throws NonexistentEntityException, Exception {
+    public void edit({Entity} obj) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
-
+           
             em.getTransaction().begin();
+            obj.setStatus(RecordStatus.ACT.toString());
             em.merge(obj);
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -81,9 +84,9 @@ public class {entity}DAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            {entity} obj;
+            {Entity} obj;
             try {
-                obj = em.getReference({entity}.class, id);
+                obj = em.getReference({Entity}.class, id);
                 obj.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The obj with id " + id + " no longer exists.", enfe);
@@ -97,18 +100,18 @@ public class {entity}DAO implements Serializable {
         }
     }
 
-    public List<{entity}> find{entity}Entities() {
-        return find{entity}Entities(true, -1, -1);
+    public List<{Entity}> find{Entity}Entities() {
+        return find{Entity}Entities(true, -1, -1);
     }
 
-    public List<{entity}> find{entity}Entities(int maxResults, int firstResult) {
-        return find{entity}Entities(false, maxResults, firstResult);
+    public List<{Entity}> find{Entity}Entities(int maxResults, int firstResult) {
+        return find{Entity}Entities(false, maxResults, firstResult);
     }
 
-    private List<{entity}> find{entity}Entities(boolean all, int maxResults, int firstResult) {
+    private List<{Entity}> find{Entity}Entities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from {entity} as o");
+            Query q = em.createQuery("select object(o) from {Entity} as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -119,31 +122,31 @@ public class {entity}DAO implements Serializable {
         }
     }
 
-    public {entity} find{entity}(Integer id) {
+    public {Entity} find{Entity}(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find({entity}.class, id);
+            return em.find({Entity}.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int get{entity}Count() {
+    public int get{Entity}Count() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from {entity} as o");
+            Query q = em.createQuery("select count(o) from {Entity} as o");
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
     
-    public List<{entity}> find{entity}Entities(Search{entity}sDTO searchDTO) {
+    public List<{Entity}> find{Entity}Entities(Search{Entity}DTO searchDTO) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from {entity} as o where o.{searchfield} like :{searchfield}");
+            Query q = em.createQuery("select object(o) from {Entity} as o where o.objname like :objname");
       
-           return q.setParameter("{searchfield}","%" + searchDTO.get{searchfield_getter}() + "%").getResultList();
+           return q.setParameter("objname","%" + searchDTO.get{Entity}name() + "%").getResultList();
         } finally {
             em.close();
         }
