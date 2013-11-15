@@ -14,9 +14,9 @@ def lineReplacer = {
  }
 
 def templatesAndTargets = [
-     "TemplateController.java" : "Controller.java",
-     "TemplateDAO.java" : "DAO.java",
-     "TemplateSearchDTO.java" : "SearchDTO.java",
+     "TemplateController.java" :  entityName + "Controller.java",
+     "TemplateDAO.java" : entityName + "DAO.java",
+     "TemplateSearchDTO.java" : "Search"+entityName+"DTO.java",
      "template_edit.xhtml" : "edit.xhtml",
      "template_new.xhtml" : "new.xhtml" ,
      "template_search.xhtml" : "search.xhtml"
@@ -26,6 +26,6 @@ def templatesAndTargets = [
 
 templatesAndTargets.each{ template, target ->
     
-    Generator.generateFile lineReplacer, templatePath + template, targetPath + entityName +  target
+    Generator.generateFile lineReplacer, templatePath + template, targetPath  +  target
 }
 
