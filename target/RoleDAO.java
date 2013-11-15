@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Company1.Company.dao;
+package softwareperson.framework.dao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +13,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import Company1.Company.dao.exceptions.NonexistentEntityException;
-import Company1.Company.dtos.SearchRoleDTO;
-import Company1.Company.entities.Role;
-import Company1.Company.util.RecordStatus;
+import softwareperson.framework.dao.exceptions.NonexistentEntityException;
+import softwareperson.framework.dtos.SearchRoleDTO;
+import softwareperson.framework.entities.Role;
+import softwareperson.framework.util.RecordStatus;
 
 
 /**
@@ -46,13 +46,13 @@ public class RoleDAO implements Serializable {
         
     }
 
-    public void create(Role obj) {
+    public void create(Role role) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            obj.setStatus(RecordStatus.ACT.toString());
-            em.persist(obj);
+            role.setStatus(RecordStatus.ACT.toString());
+            em.persist(role);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,14 +61,14 @@ public class RoleDAO implements Serializable {
         }
     }
 
-    public void edit(Role obj) throws NonexistentEntityException, Exception {
+    public void edit(Role role) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
            
             em.getTransaction().begin();
-            obj.setStatus(RecordStatus.ACT.toString());
-            em.merge(obj);
+            role.setStatus(RecordStatus.ACT.toString());
+            em.merge(role);
             em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;
@@ -84,14 +84,14 @@ public class RoleDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Role obj;
+            Role role;
             try {
-                obj = em.getReference(Role.class, id);
-                obj.getId();
+                role = em.getReference(Role.class, id);
+                role.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The obj with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The role with id " + id + " no longer exists.", enfe);
             }
-            em.remove(obj);
+            em.remove(role);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -111,7 +111,7 @@ public class RoleDAO implements Serializable {
     private List<Role> findRoleEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Role as o");
+            Query q = em.createQuery("select o from Role as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -144,9 +144,9 @@ public class RoleDAO implements Serializable {
     public List<Role> findRoleEntities(SearchRoleDTO searchDTO) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Role as o where o.objname like :objname");
+            Query q = em.createQuery("select o from Role as o where o.name like :name");
       
-           return q.setParameter("objname","%" + searchDTO.getRolename() + "%").getResultList();
+           return q.setParameter("name","%" + searchDTO.getName() + "%").getResultList();
         } finally {
             em.close();
         }

@@ -23,9 +23,9 @@ import {PackageNameStart}.entities.{Entity};
 @RequestScoped
 public class {Entity}Controller {
 
-    private Collection<{Entity}> objs = null;
+    private Collection<{Entity}> {entity}s = null;
 
-    private {Entity} obj = null;
+    private {Entity} {entity} = null;
     
     private Search{Entity}DTO search{Entity} = null;
 
@@ -33,11 +33,11 @@ public class {Entity}Controller {
 
     public {Entity}Controller() {
 
-        objs = new ArrayList<{Entity}>();
-        objs.addAll({Entity}DAO.instance().find{Entity}Entities());
+        {entity}s = new ArrayList<{Entity}>();
+        {entity}s.addAll({Entity}DAO.instance().find{Entity}Entities());
         
-        if(obj==null){
-            obj = new {Entity}();
+        if({entity}==null){
+            {entity} = new {Entity}();
         }
         
         if(search{Entity}==null){
@@ -47,19 +47,19 @@ public class {Entity}Controller {
     }
 
     public Collection<{Entity}> get{Entity}s() {
-        return objs;
+        return {entity}s;
     }
 
-    public void set{Entity}s(Collection<{Entity}> objs) {
-        this.objs = objs;
+    public void set{Entity}s(Collection<{Entity}> {entity}s) {
+        this.{entity}s = {entity}s;
     }
 
     public {Entity} get{Entity}() {
-        return obj;
+        return {entity};
     }
 
-    public void set{Entity}({Entity} obj) {
-        this.obj = obj;
+    public void set{Entity}({Entity} {entity}) {
+        this.{entity} = {entity};
     }
     
     public Search{Entity}DTO getSearch{Entity}() {
@@ -73,13 +73,13 @@ public class {Entity}Controller {
     
     
     public String create() {
-        {Entity}DAO.instance().create(obj);
+        {Entity}DAO.instance().create({entity});
         return "search?faces-redirect=true";
     }
     
      public String edit() {
         try {
-            {Entity}DAO.instance().edit(obj);
+            {Entity}DAO.instance().edit({entity});
         } catch (Exception ex) {
             Logger.getLogger({Entity}Controller.class.getName()).log(Level.SEVERE, null, ex);
             JsfUtil.addErrorMessage(ex, "Error Occurred");
@@ -89,8 +89,8 @@ public class {Entity}Controller {
      
      public String search(){
          if(search{Entity}!=null){
-             objs.clear();
-            objs.addAll({Entity}DAO.instance().find{Entity}Entities(search{Entity}));
+             {entity}s.clear();
+            {entity}s.addAll({Entity}DAO.instance().find{Entity}Entities(search{Entity}));
          }
          return "";
      }

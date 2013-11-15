@@ -3,12 +3,13 @@
 /** Config Area **/
 //======================================================================================//
 def entityName = "Role"
-def packageNameStart = "Company1.Company"
+def packageNameStart = "softwareperson.framework"
 def templatePath = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\"
 def targetPath = "C:\\work\\Projects\\minion\\target\\"
 def lineReplacer = {   
                 line ->
                 def  str  =   line.replace("{Entity}",entityName)
+                .replace("{entity}",entityName.toLowerCase())
                                   .replace("{PackageNameStart}",packageNameStart)
                 return str;
  }

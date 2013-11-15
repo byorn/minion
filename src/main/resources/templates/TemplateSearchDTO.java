@@ -14,11 +14,11 @@ import java.io.Serializable;
  */
 public class Search{Entity}DTO implements Serializable{
 
-    public String get{Entity}name() {
+    public String getName() {
         return name;
     }
 
-    public void set{Entity}name(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     private String name;

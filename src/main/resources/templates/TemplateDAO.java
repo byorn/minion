@@ -46,13 +46,13 @@ public class {Entity}DAO implements Serializable {
         
     }
 
-    public void create({Entity} obj) {
+    public void create({Entity} {entity}) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            obj.setStatus(RecordStatus.ACT.toString());
-            em.persist(obj);
+            {entity}.setStatus(RecordStatus.ACT.toString());
+            em.persist({entity});
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,14 +61,14 @@ public class {Entity}DAO implements Serializable {
         }
     }
 
-    public void edit({Entity} obj) throws NonexistentEntityException, Exception {
+    public void edit({Entity} {entity}) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
            
             em.getTransaction().begin();
-            obj.setStatus(RecordStatus.ACT.toString());
-            em.merge(obj);
+            {entity}.setStatus(RecordStatus.ACT.toString());
+            em.merge({entity});
             em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;
@@ -84,14 +84,14 @@ public class {Entity}DAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            {Entity} obj;
+            {Entity} {entity};
             try {
-                obj = em.getReference({Entity}.class, id);
-                obj.getId();
+                {entity} = em.getReference({Entity}.class, id);
+                {entity}.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The obj with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The {entity} with id " + id + " no longer exists.", enfe);
             }
-            em.remove(obj);
+            em.remove({entity});
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -111,7 +111,7 @@ public class {Entity}DAO implements Serializable {
     private List<{Entity}> find{Entity}Entities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from {Entity} as o");
+            Query q = em.createQuery("select o from {Entity} as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -144,9 +144,9 @@ public class {Entity}DAO implements Serializable {
     public List<{Entity}> find{Entity}Entities(Search{Entity}DTO searchDTO) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from {Entity} as o where o.objname like :objname");
+            Query q = em.createQuery("select o from {Entity} as o where o.name like :name");
       
-           return q.setParameter("objname","%" + searchDTO.get{Entity}name() + "%").getResultList();
+           return q.setParameter("name","%" + searchDTO.getName() + "%").getResultList();
         } finally {
             em.close();
         }

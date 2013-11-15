@@ -19,13 +19,13 @@
         <h:panelGrid id="grid" columns="4" cellpadding="5">
             
            <h:outputLabel for="name" value="Name" style="font-weight:bold"/>					
-            <p:inputText id="name" value="#{objController.obj.name}" required="true" label="Name"/>
+            <p:inputText id="name" value="#{roleController.role.name}" required="true" label="Name"/>
             <p:message for="name" />
             <h:outputText value="" />
             
         </h:panelGrid>
 
-        <p:commandButton value="Save" action="#{objController.create()}" ajax="false" icon="ui-icon-check" />
+        <p:commandButton value="Save" action="#{roleController.create()}" ajax="false" icon="ui-icon-check" />
     </p:panel>
 </h:form>
          

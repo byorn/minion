@@ -14,18 +14,18 @@
                 <p:panel header="Manage Roles">
                 <h:panelGrid columns="5" title="Roles">
                         <h:outputLabel value="Rolename"/>
-                        <h:inputText value="#{objController.searchRole.objname}"></h:inputText>
-                        <p:commandButton value="Search" action="#{objController.search()}" ajax="false" icon="ui-icon-search" />
+                        <h:inputText value="#{roleController.searchRole.name}"></h:inputText>
+                        <p:commandButton value="Search" action="#{roleController.search()}" ajax="false" icon="ui-icon-search" />
                         <p:commandButton value="New" ajax="false" action="new" icon="ui-icon-newwin" />
                         <p:commandButton value="Edit" ajax="false" action="edit" icon="ui-icon-document-b"/>
                     </h:panelGrid>
-                    <p:dataTable id="dataTable" var="obj" value="#{objController.objs}" rowKey="#{obj.id}" selection="#{objController.obj}" selectionMode="single">    
+                    <p:dataTable id="dataTable" var="role" value="#{roleController.roles}" rowKey="#{role.id}" selection="#{roleController.role}" selectionMode="single">    
                         <p:column sortBy="id" headerText="ID">  
-                            <h:outputText value="#{obj.id}" />  
+                            <h:outputText value="#{role.id}" />  
                         </p:column>  
 
                         <p:column sortBy="name" headerText="Name">  
-                            <h:outputText value="#{obj.name}" />  
+                            <h:outputText value="#{role.name}" />  
                         </p:column>  
                         
                     </p:dataTable>

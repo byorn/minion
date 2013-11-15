@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Company1.Company.dtos;
+package softwareperson.framework.dtos;
 
 import java.io.Serializable;
 
@@ -14,11 +14,11 @@ import java.io.Serializable;
  */
 public class SearchRoleDTO implements Serializable{
 
-    public String getRolename() {
+    public String getName() {
         return name;
     }
 
-    public void setRolename(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     private String name;

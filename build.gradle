@@ -13,7 +13,7 @@ task hello << {
     println "ok"
 }
 
-task runDAOGenerator (dependsOn: 'classes', type: JavaExec) {
-    main = 'ScriptDAOGenerator'
+task runMinion (dependsOn: 'classes', type: JavaExec) {
+    main = 'Minion'
     classpath = sourceSets.main.runtimeClasspath
 }
