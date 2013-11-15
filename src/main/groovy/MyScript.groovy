@@ -9,20 +9,14 @@
 //  //  println row[0]
 //}
 
-println "MyScript run"
-
-def myclosure = {
-    
-    str -> 
-    
-    str.replace("name","byorn")
-    
-    return str.replace("name","byorn")
+def startfunc(Closure c){
     
 }
 
 
-println myclosure("name of sfdsfsaf");
+def x = {
+    
+    def myparam = "blah"
+}
 
-
-myclosure  
+startfunc(x);

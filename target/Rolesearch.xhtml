@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    
+     <ui:composition template="/template.xhtml">
+        
+        <ui:define name="mainWorkArea">
+            <h:form>
+                <p:panel header="Manage Roles">
+                <h:panelGrid columns="5" title="Roles">
+                        <h:outputLabel value="Rolename"/>
+                        <h:inputText value="#{objController.searchRole.objname}"></h:inputText>
+                        <p:commandButton value="Search" action="#{objController.search()}" ajax="false" icon="ui-icon-search" />
+                        <p:commandButton value="New" ajax="false" action="new" icon="ui-icon-newwin" />
+                        <p:commandButton value="Edit" ajax="false" action="edit" icon="ui-icon-document-b"/>
+                    </h:panelGrid>
+                    <p:dataTable id="dataTable" var="obj" value="#{objController.objs}" rowKey="#{obj.id}" selection="#{objController.obj}" selectionMode="single">    
+                        <p:column sortBy="id" headerText="ID">  
+                            <h:outputText value="#{obj.id}" />  
+                        </p:column>  
+
+                        <p:column sortBy="name" headerText="Name">  
+                            <h:outputText value="#{obj.name}" />  
+                        </p:column>  
+                        
+                    </p:dataTable>
+             </p:panel>  
+        </h:form> 
+        </ui:define>
+     </ui:composition>
+    
+    
+    
+</html>
+
