@@ -13,23 +13,23 @@
             
          
     <h:form>
-    <p:panel header="Edit Role">
+    <p:panel header="Edit Accessright">
         <p:messages autoUpdate="true"/>
 
        
-        <h:inputHidden value="#{roleController.role.version}"/>
-        <h:inputHidden value="#{roleController.role.id}"/>
+        <h:inputHidden value="#{accessrightController.accessright.version}"/>
+        <h:inputHidden value="#{accessrightController.accessright.id}"/>
             
         <h:panelGrid id="grid" columns="4" cellpadding="5">
             
            <h:outputLabel for="name" value="Name" style="font-weight:bold"/>					
-            <p:inputText id="name" value="#{roleController.role.name}" required="true" label="Name"/>
+            <p:inputText id="name" value="#{accessrightController.accessright.name}" required="true" label="Name"/>
             <p:message for="name" />
             <h:outputText value="" />
             
         </h:panelGrid>
 
-        <p:commandButton value="Save" action="#{roleController.edit()}" ajax="false" icon="ui-icon-check" />
+        <p:commandButton value="Save" action="#{accessrightController.edit()}" ajax="false" icon="ui-icon-check" />
     </p:panel>
 </h:form>
          

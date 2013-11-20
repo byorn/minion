@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author byorn
  */
-public class SearchRoleDTO implements Serializable{
+public class SearchAccessrightDTO implements Serializable{
 
     public String getName() {
         return name;

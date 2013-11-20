@@ -14,7 +14,7 @@
                 <p:panel header="Manage {Entity}s">
                 <h:panelGrid columns="5" title="{Entity}s">
                         <h:outputLabel value="{Entity}name"/>
-                        <h:inputText value="#{{entity}Controller.search{Entity}.name}"></h:inputText>
+                        <h:inputText value="#{{entity}Controller.search{Entity}DTO.name}"></h:inputText>
                         <p:commandButton value="Search" action="#{{entity}Controller.search()}" ajax="false" icon="ui-icon-search" />
                         <p:commandButton value="New" ajax="false" action="new" icon="ui-icon-newwin" />
                         <p:commandButton value="Edit" ajax="false" action="edit" icon="ui-icon-document-b"/>
