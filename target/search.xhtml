@@ -11,21 +11,21 @@
         
         <ui:define name="mainWorkArea">
             <h:form>
-                <p:panel header="Manage Accessrights">
-                <h:panelGrid columns="5" title="Accessrights">
-                        <h:outputLabel value="Accessrightname"/>
-                        <h:inputText value="#{accessrightController.searchAccessrightDTO.name}"></h:inputText>
-                        <p:commandButton value="Search" action="#{accessrightController.search()}" ajax="false" icon="ui-icon-search" />
+                <p:panel header="Manage Prioritys">
+                <h:panelGrid columns="5" title="Prioritys">
+                        <h:outputLabel value="Priority Name"/>
+                        <h:inputText value="#{priorityController.searchPriority.name}"></h:inputText>
+                        <p:commandButton value="Search" action="#{priorityController.search()}" ajax="false" icon="ui-icon-search" />
                         <p:commandButton value="New" ajax="false" action="new" icon="ui-icon-newwin" />
                         <p:commandButton value="Edit" ajax="false" action="edit" icon="ui-icon-document-b"/>
                     </h:panelGrid>
-                    <p:dataTable id="dataTable" var="accessright" value="#{accessrightController.accessrights}" rowKey="#{accessright.id}" selection="#{accessrightController.accessright}" selectionMode="single">    
+                    <p:dataTable id="dataTable" var="priority" value="#{priorityController.prioritys}" rowKey="#{priority.id}" selection="#{priorityController.priority}" selectionMode="single">    
                         <p:column sortBy="id" headerText="ID">  
-                            <h:outputText value="#{accessright.id}" />  
+                            <h:outputText value="#{priority.id}" />  
                         </p:column>  
 
                         <p:column sortBy="name" headerText="Name">  
-                            <h:outputText value="#{accessright.name}" />  
+                            <h:outputText value="#{priority.name}" />  
                         </p:column>  
                         
                     </p:dataTable>

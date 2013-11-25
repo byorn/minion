@@ -2,7 +2,7 @@
 
 /** Config Area **/
 //======================================================================================//
-def entityName = "Accessright"
+def entityName = "Priority"
 def packageNameStart = "softwareperson.framework"
 def templatePath = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\"
 def targetPath = "C:\\work\\Projects\\minion\\target\\"

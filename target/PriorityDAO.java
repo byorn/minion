@@ -14,8 +14,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import softwareperson.framework.dao.exceptions.NonexistentEntityException;
-import softwareperson.framework.dtos.SearchAccessrightDTO;
-import softwareperson.framework.entities.Accessright;
+import softwareperson.framework.dtos.SearchPriorityDTO;
+import softwareperson.framework.entities.Priority;
 import softwareperson.framework.util.RecordStatus;
 
 
@@ -23,36 +23,36 @@ import softwareperson.framework.util.RecordStatus;
  *
  * @author 260514b
  */
-public class AccessrightDAO implements Serializable {
+public class PriorityDAO implements Serializable {
 
-    private static  final EntityManager em = null;
+    EntityManagerFactory factory = null;
     
-    private static AccessrightDAO instance = new AccessrightDAO();
+    private static PriorityDAO instance = new PriorityDAO();
     
-    private AccessrightDAO(){};
+    private PriorityDAO(){};
     
-    public static AccessrightDAO instance(){
+    public static PriorityDAO instance(){
         return instance;
     }
 
     public EntityManager getEntityManager() {
     
-        if(em == null){
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
+        if(factory == null){
+            factory = Persistence.createEntityManagerFactory("test");
             return factory.createEntityManager();
         }
-        return em;
+        return factory.createEntityManager();
         
         
     }
 
-    public void create(Accessright accessright) {
+    public void create(Priority priority) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            accessright.setStatus(RecordStatus.ACT.toString());
-            em.persist(accessright);
+            priority.setStatus(RecordStatus.ACT.toString());
+            em.persist(priority);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,14 +61,14 @@ public class AccessrightDAO implements Serializable {
         }
     }
 
-    public void edit(Accessright accessright) throws NonexistentEntityException, Exception {
+    public void edit(Priority priority) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
            
             em.getTransaction().begin();
-            accessright.setStatus(RecordStatus.ACT.toString());
-            em.merge(accessright);
+            priority.setStatus(RecordStatus.ACT.toString());
+            em.merge(priority);
             em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;
@@ -84,14 +84,14 @@ public class AccessrightDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Accessright accessright;
+            Priority priority;
             try {
-                accessright = em.getReference(Accessright.class, id);
-                accessright.getId();
+                priority = em.getReference(Priority.class, id);
+                priority.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The accessright with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The priority with id " + id + " no longer exists.", enfe);
             }
-            em.remove(accessright);
+            em.remove(priority);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -100,18 +100,18 @@ public class AccessrightDAO implements Serializable {
         }
     }
 
-    public List<Accessright> findAccessrightEntities() {
-        return findAccessrightEntities(true, -1, -1);
+    public List<Priority> findPriorityEntities() {
+        return findPriorityEntities(true, -1, -1);
     }
 
-    public List<Accessright> findAccessrightEntities(int maxResults, int firstResult) {
-        return findAccessrightEntities(false, maxResults, firstResult);
+    public List<Priority> findPriorityEntities(int maxResults, int firstResult) {
+        return findPriorityEntities(false, maxResults, firstResult);
     }
 
-    private List<Accessright> findAccessrightEntities(boolean all, int maxResults, int firstResult) {
+    private List<Priority> findPriorityEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select o from Accessright as o");
+            Query q = em.createQuery("select o from Priority as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -122,29 +122,29 @@ public class AccessrightDAO implements Serializable {
         }
     }
 
-    public Accessright findAccessright(Integer id) {
+    public Priority findPriority(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Accessright.class, id);
+            return em.find(Priority.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAccessrightCount() {
+    public int getPriorityCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from Accessright as o");
+            Query q = em.createQuery("select count(o) from Priority as o");
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
     
-    public List<Accessright> findAccessrightEntities(SearchAccessrightDTO searchDTO) {
+    public List<Priority> findPriorityEntities(SearchPriorityDTO searchDTO) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select o from Accessright as o where o.name like :name");
+            Query q = em.createQuery("select o from Priority as o where o.name like :name");
       
            return q.setParameter("name","%" + searchDTO.getName() + "%").getResultList();
         } finally {

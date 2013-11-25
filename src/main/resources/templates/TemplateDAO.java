@@ -25,7 +25,7 @@ import {PackageNameStart}.util.RecordStatus;
  */
 public class {Entity}DAO implements Serializable {
 
-    private static  final EntityManager em = null;
+    EntityManagerFactory factory = null;
     
     private static {Entity}DAO instance = new {Entity}DAO();
     
@@ -37,11 +37,11 @@ public class {Entity}DAO implements Serializable {
 
     public EntityManager getEntityManager() {
     
-        if(em == null){
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
+        if(factory == null){
+            factory = Persistence.createEntityManagerFactory("test");
             return factory.createEntityManager();
         }
-        return em;
+        return factory.createEntityManager();
         
         
     }
