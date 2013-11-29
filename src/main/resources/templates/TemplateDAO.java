@@ -9,7 +9,7 @@ package {PackageNameStart}.dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
@@ -17,6 +17,7 @@ import {PackageNameStart}.dao.exceptions.NonexistentEntityException;
 import {PackageNameStart}.dtos.Search{Entity}DTO;
 import {PackageNameStart}.entities.{Entity};
 import {PackageNameStart}.util.RecordStatus;
+import static softwareperson.framework.util.FrameworkUtil.*;
 
 
 /**
@@ -25,7 +26,7 @@ import {PackageNameStart}.util.RecordStatus;
  */
 public class {Entity}DAO implements Serializable {
 
-    EntityManagerFactory factory = null;
+  
     
     private static {Entity}DAO instance = new {Entity}DAO();
     
@@ -35,16 +36,7 @@ public class {Entity}DAO implements Serializable {
         return instance;
     }
 
-    public EntityManager getEntityManager() {
-    
-        if(factory == null){
-            factory = Persistence.createEntityManagerFactory("test");
-            return factory.createEntityManager();
-        }
-        return factory.createEntityManager();
-        
-        
-    }
+  
 
     public void create({Entity} {entity}) {
         EntityManager em = null;

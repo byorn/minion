@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author byorn
  */
-public class SearchPriorityDTO implements Serializable{
+public class SearchTaskDTO implements Serializable{
 
     public String getName() {
         return name;

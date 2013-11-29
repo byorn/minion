@@ -13,23 +13,23 @@
             
          
     <h:form>
-    <p:panel header="Edit Priority">
+    <p:panel header="Edit Task">
         <p:messages autoUpdate="true"/>
 
        
-        <h:inputHidden value="#{priorityController.priority.version}"/>
-        <h:inputHidden value="#{priorityController.priority.id}"/>
+        <h:inputHidden value="#{taskController.task.version}"/>
+        <h:inputHidden value="#{taskController.task.id}"/>
             
         <h:panelGrid id="grid" columns="4" cellpadding="5">
             
            <h:outputLabel for="name" value="Name" style="font-weight:bold"/>					
-            <p:inputText id="name" value="#{priorityController.priority.name}" required="true" label="Name"/>
+            <p:inputText id="name" value="#{taskController.task.name}" required="true" label="Name"/>
             <p:message for="name" />
             <h:outputText value="" />
             
         </h:panelGrid>
 
-        <p:commandButton value="Save" action="#{priorityController.edit()}" ajax="false" icon="ui-icon-check" />
+        <p:commandButton value="Save" action="#{taskController.edit()}" ajax="false" icon="ui-icon-check" />
     </p:panel>
 </h:form>
          

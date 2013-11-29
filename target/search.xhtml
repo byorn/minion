@@ -11,21 +11,21 @@
         
         <ui:define name="mainWorkArea">
             <h:form>
-                <p:panel header="Manage Prioritys">
-                <h:panelGrid columns="5" title="Prioritys">
-                        <h:outputLabel value="Priority Name"/>
-                        <h:inputText value="#{priorityController.searchPriority.name}"></h:inputText>
-                        <p:commandButton value="Search" action="#{priorityController.search()}" ajax="false" icon="ui-icon-search" />
+                <p:panel header="Manage Tasks">
+                <h:panelGrid columns="5" title="Tasks">
+                        <h:outputLabel value="Task Name"/>
+                        <h:inputText value="#{taskController.searchTask.name}"></h:inputText>
+                        <p:commandButton value="Search" action="#{taskController.search()}" ajax="false" icon="ui-icon-search" />
                         <p:commandButton value="New" ajax="false" action="new" icon="ui-icon-newwin" />
                         <p:commandButton value="Edit" ajax="false" action="edit" icon="ui-icon-document-b"/>
                     </h:panelGrid>
-                    <p:dataTable id="dataTable" var="priority" value="#{priorityController.prioritys}" rowKey="#{priority.id}" selection="#{priorityController.priority}" selectionMode="single">    
+                    <p:dataTable id="dataTable" var="task" value="#{taskController.tasks}" rowKey="#{task.id}" selection="#{taskController.task}" selectionMode="single">    
                         <p:column sortBy="id" headerText="ID">  
-                            <h:outputText value="#{priority.id}" />  
+                            <h:outputText value="#{task.id}" />  
                         </p:column>  
 
                         <p:column sortBy="name" headerText="Name">  
-                            <h:outputText value="#{priority.name}" />  
+                            <h:outputText value="#{task.name}" />  
                         </p:column>  
                         
                     </p:dataTable>

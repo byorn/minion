@@ -2,16 +2,16 @@
 
 /** Config Area **/
 //======================================================================================//
-def entityName = "Priority"
+def entityName = "Task"
 def packageNameStart = "softwareperson.framework"
 def templatePath = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\"
 def targetPath = "C:\\work\\Projects\\minion\\target\\"
 def lineReplacer = {   
                 line ->
                 def  str  =   line.replace("{Entity}",entityName)
-                .replace("{entity}",entityName.toLowerCase())
+                .replace("{entity}",entityName.replaceFirst (entityName.substring(0,1), entityName.substring(0,1).toLowerCase()))
                                   .replace("{PackageNameStart}",packageNameStart)
-                return str;
+                return str
  }
 
 def templatesAndTargets = [

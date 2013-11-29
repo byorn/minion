@@ -14,8 +14,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import softwareperson.framework.dao.exceptions.NonexistentEntityException;
-import softwareperson.framework.dtos.SearchPriorityDTO;
-import softwareperson.framework.entities.Priority;
+import softwareperson.framework.dtos.SearchTaskDTO;
+import softwareperson.framework.entities.Task;
 import softwareperson.framework.util.RecordStatus;
 
 
@@ -23,15 +23,15 @@ import softwareperson.framework.util.RecordStatus;
  *
  * @author 260514b
  */
-public class PriorityDAO implements Serializable {
+public class TaskDAO implements Serializable {
 
     EntityManagerFactory factory = null;
     
-    private static PriorityDAO instance = new PriorityDAO();
+    private static TaskDAO instance = new TaskDAO();
     
-    private PriorityDAO(){};
+    private TaskDAO(){};
     
-    public static PriorityDAO instance(){
+    public static TaskDAO instance(){
         return instance;
     }
 
@@ -46,13 +46,13 @@ public class PriorityDAO implements Serializable {
         
     }
 
-    public void create(Priority priority) {
+    public void create(Task task) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            priority.setStatus(RecordStatus.ACT.toString());
-            em.persist(priority);
+            task.setStatus(RecordStatus.ACT.toString());
+            em.persist(task);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -61,14 +61,14 @@ public class PriorityDAO implements Serializable {
         }
     }
 
-    public void edit(Priority priority) throws NonexistentEntityException, Exception {
+    public void edit(Task task) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
            
             em.getTransaction().begin();
-            priority.setStatus(RecordStatus.ACT.toString());
-            em.merge(priority);
+            task.setStatus(RecordStatus.ACT.toString());
+            em.merge(task);
             em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;
@@ -84,14 +84,14 @@ public class PriorityDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Priority priority;
+            Task task;
             try {
-                priority = em.getReference(Priority.class, id);
-                priority.getId();
+                task = em.getReference(Task.class, id);
+                task.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The priority with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The task with id " + id + " no longer exists.", enfe);
             }
-            em.remove(priority);
+            em.remove(task);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -100,18 +100,18 @@ public class PriorityDAO implements Serializable {
         }
     }
 
-    public List<Priority> findPriorityEntities() {
-        return findPriorityEntities(true, -1, -1);
+    public List<Task> findTaskEntities() {
+        return findTaskEntities(true, -1, -1);
     }
 
-    public List<Priority> findPriorityEntities(int maxResults, int firstResult) {
-        return findPriorityEntities(false, maxResults, firstResult);
+    public List<Task> findTaskEntities(int maxResults, int firstResult) {
+        return findTaskEntities(false, maxResults, firstResult);
     }
 
-    private List<Priority> findPriorityEntities(boolean all, int maxResults, int firstResult) {
+    private List<Task> findTaskEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select o from Priority as o");
+            Query q = em.createQuery("select o from Task as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -122,29 +122,29 @@ public class PriorityDAO implements Serializable {
         }
     }
 
-    public Priority findPriority(Integer id) {
+    public Task findTask(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Priority.class, id);
+            return em.find(Task.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getPriorityCount() {
+    public int getTaskCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from Priority as o");
+            Query q = em.createQuery("select count(o) from Task as o");
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }
     }
     
-    public List<Priority> findPriorityEntities(SearchPriorityDTO searchDTO) {
+    public List<Task> findTaskEntities(SearchTaskDTO searchDTO) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select o from Priority as o where o.name like :name");
+            Query q = em.createQuery("select o from Task as o where o.name like :name");
       
            return q.setParameter("name","%" + searchDTO.getName() + "%").getResultList();
         } finally {
