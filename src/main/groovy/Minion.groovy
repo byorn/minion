@@ -2,10 +2,15 @@
 
 /** Config Area **/
 //======================================================================================//
-def entityName = "Task"
-def packageNameStart = "softwareperson.framework"
-def templatePath = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\"
-def targetPath = "C:\\work\\Projects\\minion\\target\\"
+def entityName = "Flyer"
+def packageNameStart = "com.eblaster"
+//def templatePath = "C:\\work\\Projects\\minion\\build\\resources\\main\\templates\\"
+//def targetPath = "C:\\work\\Projects\\minion\\target\\"
+
+def templatePath = "/home/byorn/Projects/minion/build/resources/main/templates/"
+def targetPath = "/home/byorn/Projects/minion/target/"
+
+
 def lineReplacer = {   
                 line ->
                 def  str  =   line.replace("{Entity}",entityName)
